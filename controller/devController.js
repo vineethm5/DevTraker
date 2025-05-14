@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const   User = require("../models/DevModels");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const signup = asyncHandler(async(req,res)=>{
     const {username,useremail,password}= req.body;
     const Isfound = await User.findOne({useremail});
@@ -29,4 +30,26 @@ const signup = asyncHandler(async(req,res)=>{
 });
 
 
-module.exports = {signup};
+
+const login = asyncHandler(async(req,res)=>{
+    const {useremail,password} = req.body;
+    const finduser = await User.findOne({useremail});
+    console.log(finduser);
+    if(finduser && await bcrypt.compare(password,finduser.password))
+    {
+        const tocken = jwt.sign({
+            useremail:finduser.useremail,
+            username:finduser.username,
+            id:finduser.id
+        },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"1m"});
+
+        res.status(200).json({message:"Login Successfull",tocken:tocken});
+        
+    }
+    else
+    {
+        res.status(400);
+        throw new Error("Invalid email or password")
+    }
+})
+module.exports = {signup,login};
