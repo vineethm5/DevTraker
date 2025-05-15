@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const tb = mongoose.Schema({
     
+    
     username:{
     type:String,
     required:[true,"Please enter the username"]
