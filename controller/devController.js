@@ -41,7 +41,7 @@ const login = asyncHandler(async(req,res)=>{
             useremail:finduser.useremail,
             username:finduser.username,
             id:finduser.id
-        },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"1m"});
+        },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"10m"});
 
         res.status(200).json({message:"Login Successfull",tocken:tocken});
         
@@ -51,5 +51,11 @@ const login = asyncHandler(async(req,res)=>{
         res.status(400);
         throw new Error("Invalid email or password")
     }
+});
+
+
+const userinfo = asyncHandler(async(req,res)=>{
+   res.status(200).json({message:"hi",user: req.user});
+    
 })
-module.exports = {signup,login};
+module.exports = {signup,login,userinfo};

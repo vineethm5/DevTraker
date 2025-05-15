@@ -1,6 +1,6 @@
 const {Constants} = require("../validators");
  const errorhandler = (err,req,res,next)=>{
-    const statuscode = res.statuscode ? res.statuscode : 500
+    const statuscode = res.status ? res.status : 500
 
     switch(statuscode)
     {
