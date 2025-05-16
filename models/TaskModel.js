@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const devtasker_model = mongoose.Schema({
     user_id:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:User,
+        ref:"User",
         required:[true]
     },
     title:{
@@ -33,4 +33,4 @@ const devtasker_model = mongoose.Schema({
     timestamp:true
 });
 
-module.exports=mongoose.Model("DevTasker",devtasker_model);
+module.exports=mongoose.model("DevTask",devtasker_model);
