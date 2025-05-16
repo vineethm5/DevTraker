@@ -30,10 +30,10 @@ ________________________________________
 ├── /utils           # Helper functions
 ├── /config          # DB and env configuration
 ├── .env             # Environment variables
-└── server.js        # Entry point
+└── index.js        # Entry point
 ________________________________________
 📦 Installation
-git clone https://github.com/yourusername/devtasker-api.git
+git clone https://github.com/vineethm5/DevTraker.git
 cd devtasker-api
 npm install
 cp .env.example .env # Fill in your values

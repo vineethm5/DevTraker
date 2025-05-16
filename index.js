@@ -8,6 +8,7 @@ const PORT= process.env.PORT;
 dbConnect();
 app.use(express.json())
 app.use("/api/auth/",require("./router/DevRouter"));
+app.use("/api/tasks/",require("./router/TaskRouter"));
 app.use(errorhandler);
 
 app.listen(PORT,(err)=>{
