@@ -1,31 +1,35 @@
 const asyncHandler = require("express-async-handler");
-const devtasker = require("../models/TaskModel");
+const DevTasks = require("../models/TaskModel");
+const { default: mongoose } = require("mongoose");
 const create_Task = asyncHandler(async(req,res)=>{
     const {title,description,status,priority,duedate} = req.body;
-    console.log(duedate);
-     if (!req.user || !req.user._id) 
+    console.log(req.user);
+     if (!req.user || !req.user.id) 
     {
-    res.status(401);
-    throw new Error("Unauthorized - No user ID");
+        res.status(401);
+        throw new Error("Unauthorized - No user ID");
     }
     else
     {
-        console.log(req.user)
+        // console.log("gfd"+req.user._id)
     }
+    console.log("gfd"+ req.user.id)
+   try {
+  const creatingTask = await DevTasks.create({
+    user_id: req.user.id,
+    title,
+    description,
+    status,
+    priority,
+    duedate
+  });
 
-    const creatingTask = await devtasker.create({
-        user_id:req.user._id,
-        title:title,
-        description:description,
-        status:status,
-        priority:priority,
-        duedate:duedate
+  res.status(200).json({ message: "Task Created", task: creatingTask });
+} catch (error) {
+  console.error("Error creating task:", error);
+  res.status(500).json({ error: "Task creation failed", details: error.message });
+}
 
-    });
-    if(creatingTask)
-    {
-        res.status(200).json({message:"Task Created"});
-    }
 });
 
 module.exports = {create_Task}

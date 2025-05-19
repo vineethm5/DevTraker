@@ -4,7 +4,7 @@ const devtasker_model = mongoose.Schema({
     user_id:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:[true]
+        required:[true,"Please provide the user id"]
     },
     title:{
         type:String,
@@ -16,7 +16,7 @@ const devtasker_model = mongoose.Schema({
     },
 
     status:{
-        type:String,
+        type:String,enum:['Active','Pending','Completed'],
         required:[true,"Please enter the status"]
     },
     priority:{
@@ -30,7 +30,7 @@ const devtasker_model = mongoose.Schema({
 
 },
 {
-    timestamp:true
+    timestamps:true
 });
 
-module.exports=mongoose.model("DevTask",devtasker_model);
+module.exports=mongoose.model("DevTasks",devtasker_model);
