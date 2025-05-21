@@ -13,7 +13,7 @@ const create_Task = asyncHandler(async(req,res)=>{
     {
         // console.log("gfd"+req.user._id)
     }
-    console.log("gfd"+ req.user.id)
+    // console.log("gfd"+ req.user.id)
    try {
   const creatingTask = await DevTasks.create({
     user_id: req.user.id,
@@ -32,4 +32,37 @@ const create_Task = asyncHandler(async(req,res)=>{
 
 });
 
-module.exports = {create_Task}
+const mytasks = asyncHandler(async(req,res)=>{
+  console.log(req.user.id);
+  const tasks = await DevTasks.find({user_id:req.user.id});
+  if(tasks)
+  {
+    res.status(200).json({Message:tasks})
+  }
+  else
+  {
+    res.status(401);
+    throw new Error("Something went wrong");
+  }
+    
+  
+});
+
+
+// Incorrect usage of findById:
+// findById expects a single ID value, not an object like { _id: id }.
+
+// Wrong req.body usage:
+// You're assigning the entire req.body to id. If your body is something like { id: "123" }, then id will be an object, not the string ID you need.
+
+
+const mytaskk = asyncHandler(async(req,res)=>{
+  const {id}= req.body;
+  taskk = await DevTasks.findById(id);
+  console.log(taskk);
+})
+
+
+
+
+module.exports = {create_Task,mytasks,mytaskk}
