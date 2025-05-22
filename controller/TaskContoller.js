@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const DevTasks = require("../models/TaskModel");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const create_Task = asyncHandler(async(req,res)=>{
     const {title,description,status,priority,duedate} = req.body;
     console.log(req.user);
@@ -57,9 +57,25 @@ const mytasks = asyncHandler(async(req,res)=>{
 
 
 const mytaskk = asyncHandler(async(req,res)=>{
-  const {id}= req.body;
-  taskk = await DevTasks.findById(id);
-  console.log(taskk);
+  const task_id= req.params.id;
+ if (!mongoose.Types.ObjectId.isValid(task_id)) {
+    res.status(400);
+    throw new Error("Invalid task ID");
+  }
+
+  taskk = await DevTasks.findById(task_id);
+    
+ 
+
+  if(!taskk)
+  {
+    res.status(404).json({message:"Details not found"});
+    
+  }
+  else
+  {
+    res.status(200).json({taskk});
+  }
 })
 
 
