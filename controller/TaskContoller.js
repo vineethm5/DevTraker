@@ -79,6 +79,37 @@ const mytaskk = asyncHandler(async(req,res)=>{
 })
 
 
+const updatetask = asyncHandler(async(req,res)=>{
+  const is_found = await DevTasks.findById(req.params.id);
+  if(is_found)
+  {
+    const updating_task =  await DevTasks.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new:true}
+    )
+    if(updating_task)
+    {
+      res.status(200).json({message:"Updated Successfully","payload":updating_task});
+    }
+  }
+  res.status(400).json({message:"Task Not Found"});
+});
 
 
-module.exports = {create_Task,mytasks,mytaskk}
+const deleteTask = asyncHandler(async(req,res)=>{
+  const is_found = await DevTasks.findById(req.params.id);
+  if(!is_found)
+  {
+    res.status(400).json({message:"no task found for this id"})
+  }
+  else{
+    const dele = await is_found.deleteOne();
+    if(dele)
+    {
+      res.status(200).json({message:"Deleted Successfully"})
+    }
+  }
+})
+
+module.exports = {create_Task,mytasks,mytaskk,updatetask,deleteTask}
