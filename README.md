@@ -6,8 +6,8 @@ ________________________________________
 •	User Registration and Login (JWT Authentication)
 •	Create, Read, Update, Delete (CRUD) for tasks
 •	Filter tasks by status, priority, or due date
-•	Assign tasks to self or others (optional)
-•	Email notification support (optional)
+•	Assign tasks to self or others (optional)[Not done]
+•	Email notification support (optional)[Not done]
 •	RESTful API with proper validation and error handling
 ________________________________________
 🛠️ Tech Stack
@@ -16,7 +16,7 @@ ________________________________________
 •	JWT for authentication
 •	bcrypt for password hashing
 •	express-validator for request validation
-•	nodemailer for email (optional)
+•	nodemailer for email (optional)[Not done]
 •	dotenv for environment variable management
 ________________________________________
 📁 Project Structure
@@ -27,7 +27,6 @@ ________________________________________
 ├── /routes          # Route definitions
 ├── /middleware      # Auth and error handling middleware
 ├── /validators      # Request validation logic
-├── /utils           # Helper functions
 ├── /config          # DB and env configuration
 ├── .env             # Environment variables
 └── index.js        # Entry point
@@ -57,8 +56,8 @@ ________________________________________
 •	PUT /api/tasks/:id – Update task
 •	DELETE /api/tasks/:id – Delete task
 🔍 Filters
-•	/api/tasks?status=pending
-•	/api/tasks?priority=high&sort=dueDate
+•	/api/tasks?status=pending [Yet to be done]
+•	/api/tasks?priority=high&sort=dueDate [Yet to be done]
 ________________________________________
 🧪 Example Task Schema
 {
@@ -83,5 +82,5 @@ ________________________________________
 Pull requests are welcome! For major changes, please open an issue first.
 ________________________________________
 📬 Contact
-Your Name – Vineeth.apple5@gmail.com
+Vineeth.apple5@gmail.com
 Project Link: https://github.com/vineethm5/DevTraker
