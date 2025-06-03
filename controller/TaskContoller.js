@@ -99,6 +99,7 @@ const updatetask = asyncHandler(async(req,res)=>{
 
 const deleteTask = asyncHandler(async(req,res)=>{
   const is_found = await DevTasks.findById(req.params.id);
+  console.log("dfdf"+is_found);
   if(!is_found)
   {
     res.status(400).json({message:"no task found for this id"})

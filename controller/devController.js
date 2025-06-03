@@ -41,7 +41,7 @@ const login = asyncHandler(async(req,res)=>{
             useremail:finduser.useremail,
             username:finduser.username,
             id:finduser.id
-        },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"10m"});
+        },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"1m"});
 
         res.status(200).json({message:"Login Successfull",tocken:tocken});
         

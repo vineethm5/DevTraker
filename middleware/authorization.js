@@ -9,11 +9,18 @@ const ValidateToken = asyncHandler(async (req, res, next) => {
     token = authHeader.split(" ")[1];
     // console.log(token);
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        //  console.log(err);
-        res.status(401);
-        throw new Error("Unauthorized: Invalid token");
+      if (err) 
+      {
+          if(err.name === 'TokenExpiredError')
+          {
+           return res.status(401).json({ message: "Token expired. Please log in again." });
+          }
+          else
+          {
+           return res.status(403).json({ message: "Unauthorized: Invalid token" });
+          }
       }
+
 
       req.user = decoded; // Store decoded data (like id, username) for later use
      
